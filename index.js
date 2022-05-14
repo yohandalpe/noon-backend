@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
+var bodyParser = require("body-parser");
 var db = require("./database.js");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // root endpoint
 app.get("/", (request, response) => {
@@ -25,12 +29,13 @@ app.get("/api/posts", (request, response) => {
 // update is_favourite
 app.patch("/api/posts/favourite/:id", (request, response) => {
   var data = {
-    isFavourite: req.body.isFavourite,
+    id: request.params.id,
+    is_favourite: request.body.is_favourite,
   };
 
   db.run(
-    `UPDATE posts SET is_favourite = COALESCE(?,isFavourite) WHERE id = ?`,
-    [data.isFavourite],
+    `UPDATE posts SET is_favourite = COALESCE(?,is_favourite) WHERE id = ?`,
+    [data.is_favourite, data.id],
     function (error, result) {
       if (error) {
         response
