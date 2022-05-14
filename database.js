@@ -37,7 +37,7 @@ let db = new sqlite3.Database(DBSOURCE, (error) => {
             "Escape the ordinary.",
             "#justaplaceholderhashtag1",
             23,
-            0,
+            1,
             "AED",
           ]);
           db.run(insert, [
@@ -63,7 +63,7 @@ let db = new sqlite3.Database(DBSOURCE, (error) => {
             "One advantage of talking to yourself is that you know at least somebody's listening.",
             "#justaplaceholderhashtag3",
             90,
-            0,
+            1,
             "AED",
           ]);
           db.run(insert, [
@@ -89,7 +89,7 @@ let db = new sqlite3.Database(DBSOURCE, (error) => {
             "Always remember that you're unique. Just like everyone else.",
             "#justaplaceholderhashtag5",
             69,
-            0,
+            1,
             "AED",
           ]);
           db.run(insert, [
