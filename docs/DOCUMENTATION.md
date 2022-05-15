@@ -36,7 +36,7 @@ echo -e "node_modules\ndb.sqlite" > .gitignore
 
 4. Created the main server script index.js using Express.js.
 
-```
+```js
 // Create express app
 const express = require("express");
 const app = express();
@@ -69,7 +69,7 @@ app.listen(port, () => console.log(`Listening on port ${port}...`));
 
 6. Created a new file database.js for the local database to store information consumed by the REST API. This creates the primary database connection and its initialisation.
 
-```
+```js
 // Initialise SQLite
 var sqlite3 = require("sqlite3").verbose();
 
@@ -242,7 +242,7 @@ module.exports = db;
 
 7. Extended the REST API with data endpoints.
 
-```
+```js
 // Create express app
 const express = require("express");
 const app = express();
