@@ -60,9 +60,11 @@ app.listen(port, () => console.log(`Listening on port ${port}...`));
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  
 ```js
 
 6. Created a new file database.js for the local database to store information consumed by the REST API. This creates the primary database connection and its initialisation.
+
 ```
 // Initialise SQLite
 var sqlite3 = require("sqlite3").verbose();
