@@ -15,23 +15,27 @@ To keep things simple in the interest of time.
 
 ## Steps
 1. Created a new project folder and an empty NPM project.
+
 ```
 mkdir noon-backend && cd noon-backend
 npm init
 ```
 
 2. Installed the required dependencies for this project.
+
 ```
 npm install express sqlite3 body-parser
 ```
 
 3. Initiated Git and created a .gitignore file to ignore the node_modules folder and SQLite database that the API will create.
+
 ```
 git init
 echo -e "node_modules\ndb.sqlite" > .gitignore
 ```
 
 4. Created the main server script index.js using Express.js.
+
 ```
 // Create express app
 const express = require("express");
@@ -45,23 +49,23 @@ app.get("/", (request, response) => {
 // TODO: Insert API endpoints
 
 // Default response for other requests
-app.use(function (request, response) {
-  response.status(404);
+app.use(function (request, response) { 
+    response.status(404); 
 });
 
 // Server port
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
-```js
+```
 
 5. Added a new "start" entry in the package.json file to run the server using the `npm start` command:
-```
+
+```js
 "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  
-```js
+```
 
 6. Created a new file database.js for the local database to store information consumed by the REST API. This creates the primary database connection and its initialisation.
 
@@ -234,9 +238,10 @@ let db = new sqlite3.Database(DBSOURCE, (error) => {
 });
 
 module.exports = db;
-```js
+```
 
 7. Extended the REST API with data endpoints.
+
 ```
 // Create express app
 const express = require("express");
@@ -303,8 +308,7 @@ app.use(function (request, response) {
 // Server port
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
-
-```js
+```
 
 8. Tested the REST API via Postman by running the `npm start` command.
 
@@ -315,7 +319,8 @@ app.listen(port, () => console.log(`Listening on port ${port}...`));
 Listening on port 3001...
 Connected to the SQLite database.
 ```
-![Screenshot](images/postman-patch-favourite-post.png)
-![Screenshot](images/postman-get-posts.png)
+
+![Screenshot: GET all posts](images/postman-get-posts.png)
+![Screenshot: PATCH Favourite Post](images/postman-patch-favourite-post.png)
 
 9. Deployed on [Heroku](https://noon-backend.herokuapp.com/). 
