@@ -1,14 +1,16 @@
+// Initialise SQLite
 var sqlite3 = require("sqlite3").verbose();
 
 const DBSOURCE = "db.sqlite";
 
 let db = new sqlite3.Database(DBSOURCE, (error) => {
   if (error) {
-    // show database connection error in console
+    // Show database connection error in console
     console.error(error.message);
     throw error;
   } else {
     console.log("Connected to the SQLite database.");
+    // Create posts table and feed fake data
     db.run(
       `CREATE TABLE posts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

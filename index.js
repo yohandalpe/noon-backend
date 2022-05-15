@@ -1,19 +1,23 @@
+// Create express app
 const express = require("express");
 const app = express();
-var bodyParser = require("body-parser");
-var db = require("./database.js");
+const bodyParser = require("body-parser");
+const db = require("./database.js");
 
+// Adding a generic JSON and URL-encoded parser as a top-level middleware, which will parse the bodies of all incoming requests.
+// Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+// Parse application/json
 app.use(bodyParser.json());
 
-// root endpoint
+// Root endpoint
 app.get("/", (request, response) => {
   response.json({ message: "ok" });
 });
 
-// get all posts from the database
+// Get all posts from the database
 app.get("/api/posts", (request, response) => {
-  var sql = "SELECT * FROM posts";
+  const sql = "SELECT * FROM posts";
   db.all(sql, (error, rows) => {
     if (error) {
       response.status(400).json({ message: "error", error: error.message });
@@ -26,9 +30,9 @@ app.get("/api/posts", (request, response) => {
   });
 });
 
-// update is_favourite
+// Update is_favourite
 app.patch("/api/posts/favourite/:id", (request, response) => {
-  var data = {
+  const data = {
     id: request.params.id,
     is_favourite: request.body.is_favourite,
   };
@@ -46,16 +50,16 @@ app.patch("/api/posts/favourite/:id", (request, response) => {
       response.json({
         message: "success",
         data: data,
-        changes: this.changes,
       });
     }
   );
 });
 
-// default response for other requests
+// Default response for other requests
 app.use(function (request, response) {
   response.status(404);
 });
 
+// Server port
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
